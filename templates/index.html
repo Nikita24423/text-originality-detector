@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ оригинальности · БД</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div>
+                        <h1>Анализ оригинальности</h1>
+                        <p class="subtitle">Сравнение работы со всеми документами в базе · bge-m3 · TF-IDF+BM25 · rugpt3</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="panel input-panel">
+                <div class="panel-header">
+                    <h2>Работы в базе</h2>
+                    <button type="button" class="file-btn" id="refresh-docs-btn">Обновить</button>
+                </div>
+
+                <p class="hint" id="docs-count">Загрузка списка…</p>
+                <div id="docs-list" class="docs-list"></div>
+
+                <div class="divider"></div>
+
+                <h3 class="section-title">Добавить работу</h3>
+                <div class="field-header">
+                    <label class="field-label" for="doc-title">Название</label>
+                </div>
+                <input type="text" id="doc-title" class="text-input" placeholder="Например: Курсовая Иванова" />
+
+                <div class="field-header">
+                    <label class="field-label" for="doc-text">Текст (или файл)</label>
+                    <div class="file-actions">
+                        <input type="file" id="doc-file" class="file-input" accept=".txt,.md,.docx,.pdf" hidden>
+                        <button type="button" class="file-btn" data-target="doc-file">Прикрепить файл</button>
+                        <span class="file-badge hidden" id="doc-file-badge"></span>
+                    </div>
+                </div>
+                <textarea id="doc-text" rows="6" placeholder="Вставьте текст или прикрепите файл (.txt, .md, .docx, .pdf)…"></textarea>
+
+                <button id="upload-btn" class="secondary-btn">
+                    <span class="btn-text">Сохранить в БД</span>
+                </button>
+
+                <div class="divider"></div>
+
+                <button id="analyze-btn" class="primary-btn" disabled>
+                    <span class="btn-text">Проверить выбранную</span>
+                    <span class="btn-loader hidden"></span>
+                </button>
+                <p id="queue-status" class="queue-status hidden"></p>
+            </section>
+
+            <section class="panel result-panel" id="result-panel">
+                <div class="empty-state" id="empty-state">
+                    <h3>Результаты появятся здесь</h3>
+                    <p>Выберите работу из списка или загрузите новую, затем нажмите «Проверить». Сравнение идёт со всеми другими документами в базе — отдельный корпус не нужен.</p>
+                </div>
+
+                <div id="results" class="hidden">
+                    <div class="score-cards" id="score-cards"></div>
+                    <p class="summary" id="summary"></p>
+
+                    <div class="method-info">
+                        <span>Корпус: все работы в БД кроме проверяемой</span>
+                        <span>Алгоритм: bge-m3 + TF-IDF/BM25</span>
+                    </div>
+
+                    <div id="ai-section" class="hidden">
+                        <h3 class="section-title">ИИ (rugpt3)</h3>
+                        <div class="ai-cards" id="ai-cards"></div>
+                    </div>
+
+                    <h3 class="section-title">Заимствования</h3>
+                    <div id="borrowings-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

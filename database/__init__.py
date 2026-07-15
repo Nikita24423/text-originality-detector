@@ -1,0 +1,53 @@
+from database.corpus import (
+    create_source,
+    get_source_content,
+    insert_chunks,
+    list_sources,
+    load_corpus_texts,
+    mark_source_indexed,
+    new_point_id,
+    search_pgvector,
+)
+from database.pool import (
+    check_db,
+    close_pool,
+    db_connection,
+    get_pool,
+    init_schema,
+    pgvector_available,
+)
+from database.tasks import (
+    complete_task,
+    count_pending_tasks,
+    create_task,
+    fail_task,
+    fetch_next_task,
+    get_task,
+    queue_position,
+    update_task_progress,
+)
+
+__all__ = [
+    "check_db",
+    "close_pool",
+    "complete_task",
+    "count_pending_tasks",
+    "create_source",
+    "create_task",
+    "db_connection",
+    "fail_task",
+    "fetch_next_task",
+    "get_pool",
+    "get_source_content",
+    "get_task",
+    "init_schema",
+    "insert_chunks",
+    "list_sources",
+    "load_corpus_texts",
+    "mark_source_indexed",
+    "new_point_id",
+    "pgvector_available",
+    "queue_position",
+    "search_pgvector",
+    "update_task_progress",
+]
